@@ -51,7 +51,7 @@ def read_prices(filename):
 
 #
 #
-# Exercise 2.8
+# Exercise 2.9
 
 def make_report(portfolio, prices):
     '''
@@ -86,4 +86,26 @@ print(f'Valor actual del portfolio: {valor_actual}')
 print(f'Costo total del portfolio: {costo_total}')
 print(f'Ganancia: {valor_actual - costo_total}')
 
+#
+#
+# Exercise 2.10
+# print del reporte formateado
+reporte = make_report(portfolio, prices)
+for fila in reporte:
+    print('%10s %10d %10.2f %10.2f' % fila)
 
+# print usando f-strings
+print('\nf-strings')
+for name, shares, price, change in reporte:
+    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+
+#
+#
+# Exercise 2.11
+# print del reporte formateado con encabezados
+print('\nReporte Formateado')
+headers = ('Name', 'Shares', 'Price', 'Change')
+print('%10s %10s %10s %10s' % headers)
+print(('-' * 10 + ' ') * len(headers))  # tomado de /solutions/2.11
+for name, shares, price, change in reporte:
+    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
