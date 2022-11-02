@@ -61,7 +61,7 @@ def make_report(portfolio, prices):
     '''
     report = []
     for stock in portfolio:
-        stock_detail = (stock['name'], stock['shares'], prices[stock['name']], prices[stock['name']] - stock['price'])
+        stock_detail = (stock['name'], stock['shares'], '$' + str(prices[stock['name']]), prices[stock['name']] - stock['price'])
         report.append(stock_detail)
 
     return report
@@ -92,20 +92,24 @@ print(f'Ganancia: {valor_actual - costo_total}')
 # print del reporte formateado
 reporte = make_report(portfolio, prices)
 for fila in reporte:
-    print('%10s %10d %10.2f %10.2f' % fila)
+    print('%10s %10d %10s %10.2f' % fila)
 
 # print usando f-strings
 print('\nf-strings')
 for name, shares, price, change in reporte:
-    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+    print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
 
 #
 #
 # Exercise 2.11
 # print del reporte formateado con encabezados
 print('\nReporte Formateado')
+print('\n')
 headers = ('Name', 'Shares', 'Price', 'Change')
 print('%10s %10s %10s %10s' % headers)
 print(('-' * 10 + ' ') * len(headers))  # tomado de /solutions/2.11
 for name, shares, price, change in reporte:
-    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+    print(f'{name:>10s} {shares:>10d} {price:>10s} {change:>10.2f}')
+
+# Exercise 2.12: Se modifica el Price en la funcion make_report
+# convirtiendo a str el valor y anteponiendole el $.
