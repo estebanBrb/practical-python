@@ -49,6 +49,27 @@ def read_prices(filename):
     return prices
 
 
+#
+#
+# Exercise 2.8
+
+def make_report(portfolio, prices):
+    '''
+     Takes a list of stocks and dictionary of prices 
+     as input and returns a list of tuples containing 
+     the rows of a table.
+    '''
+    report = []
+    for stock in portfolio:
+        stock_detail = (stock['name'], stock['shares'], prices[stock['name']], prices[stock['name']] - stock['price'])
+        report.append(stock_detail)
+
+    return report
+
+#
+#
+#
+
 portfolio = read_portfolio('Data/portfolio.csv')
 prices = read_prices('Data/prices.csv')
 
