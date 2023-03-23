@@ -9,7 +9,7 @@ def parse_csv(filename, select = None, types = None, has_headers = False, delimi
     '''                                                   
     Parse a CSV file into a list of records
     '''
-    if select and has_headers == False:
+    if select and has_headers == False: # Exercise 3.8
         raise RuntimeError("select argument requires column headers")
     
     with open(filename) as f:
@@ -20,12 +20,17 @@ def parse_csv(filename, select = None, types = None, has_headers = False, delimi
         else:
             headers = []
 
-        for row in rows:
+        for rownum, row in enumerate(rows): # Exercise 3.9 enumeramos las filas
             if not row:    # Skip rows with no data
                 continue
 
             if types:
-                row = [func(val) for func, val in zip(types, row) ]
+                try:
+                    row = [func(val) for func, val in zip(types, row) ]
+                except ValueError as e: # Exercise 3.9 Capturamos los ValueError por fila 
+                    print(f'Row {rownum}: Couldn\'t convert {row}')
+                    print(f'Reason {e}')
+
 
             if select:
                 row = [row[headers.index(colname)] for colname in select]
